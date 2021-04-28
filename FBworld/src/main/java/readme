@@ -1,0 +1,10 @@
+/fbworld : main
+/fbworld/login : login화면
+/fbworld/loginAction
+
+
+/fbworld/insert : 게시판 입력 폼 출력...
+/article/insertAction : insertAction
+/list : 리스트
+/detatail : 상세보기
+/delete : 
