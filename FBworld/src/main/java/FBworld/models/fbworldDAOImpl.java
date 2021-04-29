@@ -237,7 +237,7 @@ public int memberLogin(memberDTO memberDto) throws SQLException {
 public void memberJoin(memberDTO memberDto) throws SQLException {
 	
 	   StringBuffer sql = new StringBuffer();
-	   sql.append("insert into member(no, id, password, nickname)");
+	   sql.append("insert into member(no, id, password, nickname) ");
 	   sql.append("values(seq_member_no.nextval,?,?,?) ");
 	  
 	   try (Connection con = dataSource.getConnection();
