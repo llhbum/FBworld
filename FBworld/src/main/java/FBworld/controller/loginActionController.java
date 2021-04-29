@@ -19,14 +19,12 @@ public class loginActionController extends AbstractController{
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 		
-		
+		HttpSession session = request.getSession(true);
+		session.setAttribute("id", id);
 		
 		memberDTO memberDto = new memberDTO();
 		memberDto.setId(id);
 		memberDto.setPassword(password);
-		
-		HttpSession session = request.getSession(true);
-		session.setAttribute("memberDtoSession", memberDto);
 		
 		ModelAndView mav = new ModelAndView();
 		

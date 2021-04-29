@@ -7,7 +7,7 @@
 <head>
 <link rel="icon" type="image/png" sizes="" href="">
 <meta charset="UTF-8">
-<title>게시물 삭제</title>
+<title>quizDelete</title>
 </head>
 <body>
 <form action="quizDeleteAction" method="post">

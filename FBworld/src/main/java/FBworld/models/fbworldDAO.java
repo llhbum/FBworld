@@ -38,5 +38,14 @@ public interface fbworldDAO {
 	
 	void memberJoin(memberDTO memberDto) throws SQLException;
 
+	String checkAnswer(long no) throws SQLException;
+	
+//	void insertHitman(long memberDTO_no, long quizboardDTO_no, long score) throws SQLException;
+	
+	int scoreHitman(String id, long score) throws SQLException;
+	
+	int expirecheck(long no) throws SQLException;
+	
+
 	
 }

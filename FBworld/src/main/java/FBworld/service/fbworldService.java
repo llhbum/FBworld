@@ -42,4 +42,12 @@ public interface fbworldService {
 	
 	void memberJoin(memberDTO memberDto) throws Exception;
 	
+	String checkAnswer(long no) throws Exception;
+	
+//	void insertHitman(long memberDTO_no, long quizboardDTO_no, long score) throws Exception;
+	
+	void scoreHitman(String id, long score) throws Exception;
+	
+	void expirecheck(long id) throws Exception;
+	
 }

@@ -4,15 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert.jsp</title>
+<title>quizInsert</title>
 </head>
 <body>
-	<form action="quizInsertAction" method="post" enctype="multipart/form-data">
+	<form action="quizInsertAction" method="post">
 		<table>
 			<caption>Quiz등록</caption>
 			<tr>
 				<th>제목</th>
-				<td><input type = "text" name ="title" autofocus="autofocus" required ="required"/></td>
+				<td><input type=text" name="title" autofocus="autofocus" required ="required"/></td>
 			</tr>
 			
 			<tr>
@@ -22,7 +22,7 @@
 			
 			<tr>
 				<th>이미지</th>
-				<td><input type="file" name="imagepath" ><br></td>
+				<td><input type="text" name="imagepath" ><br></td>
 			</tr>
 			
 			<tr>

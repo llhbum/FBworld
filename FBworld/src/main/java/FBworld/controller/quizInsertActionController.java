@@ -16,6 +16,7 @@ public class quizInsertActionController extends AbstractController {
 	@Override
 	public ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) {
 		String title = request.getParameter("title");
+		System.out.println(title);
 		String content = request.getParameter("content");
 		String imagepath = request.getParameter("imagepath");
 		System.out.println(imagepath);

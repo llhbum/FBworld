@@ -109,7 +109,7 @@ public void updateReadcount(long no) throws SQLException {
 public quizboardDTO getDetail(long no) throws SQLException {
 	StringBuffer sql = new StringBuffer();
 	sql.append("select no, title, content, imagepath,   ");
-	sql.append("hint1, hint2, hint3, hint4, hint5, answer, readcount, expdate ");
+	sql.append("hint1, hint2, hint3, hint4, hint5, answer, readcount, expdate, expirecheck ");
 	sql.append("from quizboard ");
 	sql.append("where no=? ");
 
@@ -133,6 +133,7 @@ public quizboardDTO getDetail(long no) throws SQLException {
 				quizboardDTO.setAnswer(rs.getString("answer"));
 				quizboardDTO.setReadcount(rs.getLong("readcount"));
 				quizboardDTO.setExpdate(rs.getDate("expdate"));
+				quizboardDTO.setExpirecheck(rs.getLong("expirecheck"));
 			}
 		}
 	} 
@@ -248,116 +249,55 @@ public void memberJoin(memberDTO memberDto) throws SQLException {
 	   }
 }
 
+@Override
+public String checkAnswer(long no) throws SQLException {
+		StringBuffer sql = new StringBuffer();
+		sql.append("select answer from quizboard ");
+		sql.append("where no=? ");
+		String answer = null;
+		
+		try (Connection conn = dataSource.getConnection();
+			 PreparedStatement ps = conn.prepareStatement(sql.toString())){
+			ps.setLong(1, no);
+			try (ResultSet rs = ps.executeQuery()) {
+				if(rs.next()) {
+					answer = rs.getString("answer");
+				}
+			}
+		}
+		return answer; 
+}
 
 
-//   @Override
-//   public void insertArticle(memberDTO articleDTO) throws SQLException {
-//      StringBuffer sql = new StringBuffer();
-//      sql.append("INSERT INTO t_board(no, title, name, password, content) ");
-//      sql.append("VALUES(seq_board.nextval, ?, ?, ?, ?) ");
-//      
-//      try (Connection con = dataSource.getConnection();
-//            PreparedStatement ps = con.prepareStatement(sql.toString())){
-//         ps.setString(1, articleDTO.getTitle());
-//         ps.setString(2, articleDTO.getName());
-//         ps.setString(3, articleDTO.getPassword());
-//         ps.setString(4, articleDTO.getContent());
-//         ps.executeUpdate();
-//      }
-//   }
-//
-//	@Override
-//	public List<memberDTO> getArticleList() throws SQLException {
-//		StringBuffer sql = new StringBuffer();
-//		sql.append("select B.* ");
-//		sql.append("from  (select rownum as rnum, A.* ");
-//		sql.append("       from  (select no, title, name, regdate, readcount from t_board ");
-//		sql.append("              order by no desc) A) B ");
-//		sql.append("where rnum between 1 and 10 ");
-//
-//		List<memberDTO> list = new ArrayList<>();
-//		
-//		try (Connection conn = dataSource.getConnection();
-//			 PreparedStatement ps = conn.prepareStatement(sql.toString())){
-//			
-//			try (ResultSet rs = ps.executeQuery()) {
-//				while(rs.next()) {
-//					memberDTO articleDTO = new memberDTO();
-//					articleDTO.setNo(rs.getLong("no"));
-//					articleDTO.setTitle(rs.getString("title"));
-//					articleDTO.setName(rs.getString("name"));
-//					articleDTO.setRegdate(rs.getDate("regdate"));
-//					articleDTO.setReadcount(rs.getInt("readcount"));
-//					list.add(articleDTO);
-//				}
-//			}
-//		} 
-//		return list;
-//	}
-//
-//	@Override
-//	public memberDTO getDetail(long no) throws SQLException {
-//		StringBuffer sql = new StringBuffer();
-//		sql.append("select no, title, name, regdate, readcount, content ");
-//		sql.append("from   t_board ");
-//		sql.append("where  no=? ");
-//
-//		memberDTO articleDTO = null;
-//		
-//		try (Connection conn = dataSource.getConnection();
-//			 PreparedStatement ps = conn.prepareStatement(sql.toString())){
-//			ps.setLong(1, no);
-//			try (ResultSet rs = ps.executeQuery()) {
-//				if(rs.next()) {
-//					articleDTO = new memberDTO();
-//					articleDTO.setNo(rs.getLong("no"));
-//					articleDTO.setTitle(rs.getString("title"));
-//					articleDTO.setName(rs.getString("name"));
-//					articleDTO.setRegdate(rs.getDate("regdate"));
-//					articleDTO.setReadcount(rs.getInt("readcount"));
-//					articleDTO.setContent(rs.getString("content"));
-//				}
-//			}
-//		} 
-//		return articleDTO;
-//	}
-//	
-//	
-//	@Override
-//	public void updateReadcount(long no) throws SQLException {
-//	}
-//	
-//	@Override
-//	public int updateArticle(memberDTO articleDTO) throws SQLException {
-//		StringBuffer sql = new StringBuffer();
-//		sql.append("UPDATE t_board SET ");
-//		sql.append("       title=?     ");
-//		sql.append("      ,name=?      ");
-//		sql.append("      ,content=?   ");
-//		sql.append("WHERE  no=? AND password=? ");
-//
-//		try(Connection conn = dataSource.getConnection();
-//			PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
-//			pstmt.setString(1, articleDTO.getTitle());
-//			pstmt.setString(2, articleDTO.getName());
-//			pstmt.setString(3, articleDTO.getContent());
-//			pstmt.setLong(4, articleDTO.getNo());
-//			pstmt.setString(5, articleDTO.getPassword());
-//			return pstmt.executeUpdate();
-//		}		
-//	}
-//
-//	@Override
-//	public int deleteArticle(memberDTO articleDTO) throws SQLException {
-//		StringBuffer sql = new StringBuffer();
-//		sql.append("delete from t_board ");
-//		sql.append("where no=? and password=?");
-//		
-//		try(Connection conn = dataSource.getConnection();
-//				PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
-//				pstmt.setLong(1, articleDTO.getNo());
-//				pstmt.setString(2, articleDTO.getPassword());
-//				return pstmt.executeUpdate();
-//			}	
-//	}
+@Override
+public int scoreHitman(String id, long score) throws SQLException {
+	StringBuffer sql = new StringBuffer();
+	sql.append("update member set ");
+	sql.append("score=score+? ");
+	sql.append("where id=? ");
+	System.out.println(id);
+	System.out.println(score);
+	
+	try(Connection conn = dataSource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+			pstmt.setLong(1, score);
+			pstmt.setString(2, id);
+			return pstmt.executeUpdate();
+		}
+}
+
+@Override
+public int expirecheck(long no) throws SQLException {
+	StringBuffer sql = new StringBuffer();
+	sql.append("update quizboard set ");
+	sql.append("expirecheck=1 ");
+	sql.append("where no=? ");
+	
+	try(Connection conn = dataSource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+			pstmt.setLong(1, no);
+			return pstmt.executeUpdate();
+		}
+}
+
 }

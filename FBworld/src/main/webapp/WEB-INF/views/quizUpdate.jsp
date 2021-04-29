@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시물 수정</title>
+<title>quizUpdate</title>
 </head>
 <body>
 	<form action="quizUpdateAction" method="post">

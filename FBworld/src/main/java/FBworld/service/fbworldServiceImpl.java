@@ -67,7 +67,6 @@ public class fbworldServiceImpl implements fbworldService{
 	@Override
 	public void updateQuiz(quizboardDTO quizboardDTO) throws Exception {
 			if (fbworldDao.updateQuiz(quizboardDTO) == 0) {
-				System.out.println("fbwordDao.updateQuiz(quizboardDTO) " + fbworldDao.updateQuiz(quizboardDTO));
 			throw new RuntimeException("글이 없거나 비밀번호가 틀립니다.");
 		}
 	}
@@ -87,6 +86,30 @@ public class fbworldServiceImpl implements fbworldService{
 		fbworldDao.memberJoin(memberDto);
 	}
 
+	@Override
+	public String checkAnswer(long no) throws Exception {
+		String answer = fbworldDao.checkAnswer(no);
+		return answer;
+	}
+
+//	@Override
+//	public void insertHitman(long memberDTO_no, long quizboardDTO_no, long score) throws Exception {
+//		fbworldDao.insertHitman(memberDTO_no, quizboardDTO_no, score );
+//	}
+
+	@Override
+	public void scoreHitman(String id , long score) throws Exception {
+		if (fbworldDao.scoreHitman(id, score) == 0) {
+			throw new RuntimeException("실패하였습니다.");
+		}
+	}
+
+	@Override
+	public void expirecheck(long id) throws Exception {
+		if (fbworldDao.expirecheck(id) == 0) {
+			throw new RuntimeException("실패하였습니다.");
+		}
+	}
 
 	
 
