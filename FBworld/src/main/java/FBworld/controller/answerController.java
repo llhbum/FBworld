@@ -29,7 +29,7 @@ public class answerController extends AbstractController {
 		
 		try {
 			if(answer.equals(fbworldService.checkAnswer(no))){
-				System.out.println("정답입니다.");
+				System.out.println("정답입니다. ");
 				fbworldService.scoreHitman(id, score);
 				fbworldService.expirecheck(no);
 				mav.setViewName("/WEB-INF/views/result2.jsp");
