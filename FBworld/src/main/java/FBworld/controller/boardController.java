@@ -21,15 +21,10 @@ import jdk.internal.org.jline.utils.Log;
 
 public class boardController extends AbstractController{
 	private fbworldService fbworldService = fbworldServiceImpl.getInstance();
-	
-//	private static Logger logger = Logger.getLogger(boardController.class);
-//	private static Logger logger = LoggerFactory.getLogger(boardController.class);
-	
    @Override
    public ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) {
 	   
 	ModelAndView mav = new ModelAndView(); 
-//	logger.info("log4j test");
 	
    try {
 		List<quizboardDTO> quizboardList = fbworldService.getQuizBoardList();
