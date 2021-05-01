@@ -12,17 +12,6 @@ import FBworld.models.quizboardDTO;
 
 public interface fbworldService {
 
-//	void insertArticle(memberDTO articleDTO) throws Exception;
-//
-//	List<memberDTO> getArticleList() throws Exception;
-//
-//	memberDTO getDetail(long no, boolean updateReadcount) throws Exception;
-//
-//	memberDTO getDetail(long no) throws Exception;
-//
-//	void updateArticle(memberDTO articleDTO) throws Exception;
-//	
-//	void deleteArticle(memberDTO articleDTO) throws Exception;
 	
 	List<quizboardDTO> getQuizBoardList() throws Exception;
 	

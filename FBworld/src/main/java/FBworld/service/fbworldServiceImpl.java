@@ -92,11 +92,6 @@ public class fbworldServiceImpl implements fbworldService{
 		return answer;
 	}
 
-//	@Override
-//	public void insertHitman(long memberDTO_no, long quizboardDTO_no, long score) throws Exception {
-//		fbworldDao.insertHitman(memberDTO_no, quizboardDTO_no, score );
-//	}
-
 	@Override
 	public void scoreHitman(String id , long score) throws Exception {
 		if (fbworldDao.scoreHitman(id, score) == 0) {
@@ -113,47 +108,4 @@ public class fbworldServiceImpl implements fbworldService{
 
 	
 
-//
-//	@Override
-//	public void insertArticle(memberDTO articleDTO) throws Exception {
-//		articleDAO.insertArticle(articleDTO);
-//	}
-//	
-//	@Override
-//	public List<memberDTO> getArticleList() throws Exception {
-//		return articleDAO.getArticleList();
-//	}
-//	
-//	@Override
-//	public memberDTO getDetail(long no) throws Exception {
-//		return getDetail(no, true);
-//	}
-//
-//	@Override
-//	public memberDTO getDetail(long no, boolean updateReadcount) throws Exception {
-//		try {
-//			if (updateReadcount) articleDAO.updateReadcount(no);
-//			
-//			memberDTO articleDTO = articleDAO.getDetail(no);
-//			if (articleDTO == null) {
-//				throw new RuntimeException("상세보기 실패");
-//			}
-//			return articleDTO;
-//		} finally {}
-//	}
-//
-//	@Override
-//	public void updateArticle(memberDTO articleDTO) throws Exception {
-//		if (articleDAO.updateArticle(articleDTO) == 0) {
-//			throw new RuntimeException("글이 없거나 비밀번호가 틀립니다.");
-//		}
-//	}
-//
-//	@Override
-//	public void deleteArticle(memberDTO articleDTO) throws Exception {
-//		
-//		if (articleDAO.deleteArticle(articleDTO) == 0) {
-//			throw new RuntimeException("글이 없거나 비밀번호가 틀립니다.");
-//		}
-//	}
 }

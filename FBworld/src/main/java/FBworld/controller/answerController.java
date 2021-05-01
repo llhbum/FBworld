@@ -19,11 +19,9 @@ public class answerController extends AbstractController {
 		String answer = request.getParameter("answer");
 		long no = Long.parseLong(request.getParameter("no"));
 		long score = Long.parseLong(request.getParameter("score"));
-//		System.out.println(score);// ok
 		
 		HttpSession session = request.getSession(true);
 		String id = (String)session.getAttribute("id");
-//		System.out.println(id); //user01
 		
 		ModelAndView mav = new ModelAndView();   
 		
